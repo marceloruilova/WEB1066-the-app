@@ -23,11 +23,11 @@ script:
 - docker login --password "${DOCKER_PASSWORD}" --username "${DOCKER_LOGIN}";
 - "./gradlew -p $BUILD_TARGET check"
 before deploy:
-  - "./gradlew -p ./monolithic/ui packageToContainer"
+  - "./gradlew -p ./monolithic/ui packageToContainer ;"
 deploy:
   provider: script
   script: "./script/deploy.sh"
   on:
     branch: master
-    condition: $BUILD_TARGET=./monolithic/ui
+    condition: "$BUILD_TARGET=='./monolithic/ui'"
 
